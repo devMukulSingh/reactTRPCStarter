@@ -2,6 +2,7 @@ import express from "express";
 import { createExpressMiddleware } from "@trpc/server/adapters/express"
 import { appRouter } from "./routers";
 import cors from "cors";
+import { createContext } from "./trpc";
 
 const app = express();
 
@@ -11,7 +12,8 @@ app.use(cors({
     
 }))
 app.use('/trpc', createExpressMiddleware({
-    router: appRouter
+    router: appRouter,
+    createContext:createContext
 }))
 
 
